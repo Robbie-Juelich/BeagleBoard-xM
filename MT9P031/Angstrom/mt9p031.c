@@ -539,10 +539,6 @@ static int mt9p031_init_camera(const struct i2c_client *client)
 	ret |= mt9p031_reg_write(client, REG_MT9P031_RESET, 0x0000);	//Low
 	mdelay(100);
 	
-	ret |= mt9p031_reg_write(client, REG_MT9P031_GREEN_1_GAIN, 0x0051);  	//Green1_gain_reg
-	ret |= mt9p031_reg_write(client, REG_MT9P031_BLUE_GAIN, 0x0051);  	//Blue_gain_reg
-	ret |= mt9p031_reg_write(client, REG_MT9P031_RED_GAIN, 0x0051);  	//Red_gain_reg
-	ret |= mt9p031_reg_write(client, REG_MT9P031_GREEN_2_GAIN, 0x0051);  	//Green2_gain_reg
 	ret |= mt9p031_reg_write(client, REG_MT9P031_GLOBAL_GAIN, 0x0008);		//Analog Gain
 	ret |= mt9p031_reg_write(client, REG_MT9P031_READ_MODE1, 0x0006);  	//Read_mode_1 //disable AB
 	ret |= mt9p031_reg_write(client, REG_MT9P031_OUT_CTRL, 0x1F8E);		//Enable parll fifo data
