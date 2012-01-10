@@ -1,13 +1,13 @@
 /*
- * drivers/media/video/mt9p015_regs.h
+ * drivers/media/video/mt9p004_regs.h
  * 
- * mt9p015_regs.h - mt9p015 sensor register address file
+ * mt9p004_regs.h - mt9p004 sensor register address file
  * 
  */
 
 
-#ifndef __VIDEO_MT9P015_REGS_H
-#define __VIDEO_MT9P015_REGS_H
+#ifndef __VIDEO_MT9P004_REGS_H
+#define __VIDEO_MT9P004_REGS_H
 
 #define REG_MODEL_ID			0x0000
 #define REG_REVISION_NUMBER		0x0002
@@ -74,4 +74,4 @@
 #define REG_TEST_PATTERN		0x3070
 
 #define REG_PARALL_INTERFACE		0x31AE
-#endif /* __VIDEO_MT9P015_REGS_H */
+#endif /* __VIDEO_MT9P004_REGS_H */

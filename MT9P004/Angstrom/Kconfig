@@ -354,12 +354,12 @@ config VIDEO_MT9P012
 	  MT9P012 camera.  It is currently working with the TI OMAP3
 	  camera controller.
 
-config VIDEO_MT9P015
-	tristate "Aptina MT9P015 raw sensor driver (5MP)"
+config VIDEO_MT9P004
+	tristate "Aptina MT9P004 raw sensor driver (5MP)"
 	depends on I2C && VIDEO_V4L2
 	---help---
 	  This is a Video4Linux2 sensor-level driver for the APTINA
-	  MT9P015 camera.  It is currently working with the TI OMAP3
+	  MT9P004 camera.  It is currently working with the TI OMAP3
 	  camera controller.
 
 config VIDEO_MT9T112

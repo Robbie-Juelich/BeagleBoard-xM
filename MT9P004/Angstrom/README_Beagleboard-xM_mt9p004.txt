@@ -1,18 +1,18 @@
 
 -----------------------------------------------------------------------
 |                                                                     |
-|Aptina MT9P015 (5 megapixel bayer) image sensor linux driver release |
+|Aptina MT9P004 (5 megapixel bayer) image sensor linux driver release |
 |                                                                     |
 -----------------------------------------------------------------------
-    Release notes for the Aptina MT9P015 image sensor linux driver.
+    Release notes for the Aptina MT9P004 image sensor linux driver.
     This document contains information on how to download the OS, build
     the driver/OS and how to use the sensor. Please read this document
     before posting questions to the drivers@aptina.com e-mail address.
 
 
-MT9P015 Driver
+MT9P004 Driver
 --------------
-    The MT9P015 driver is a Video for Linux 2 (V4L2) driver that is compiled
+    The MT9P004 driver is a Video for Linux 2 (V4L2) driver that is compiled
     into the Beagleboard-xM Linux Angstrom distribution. It is distributed under
     the GNU General Public License agreement which can be obtained from Free Software 
     Foundation, Inc., 675 Mass Ave, Cambridge, MA02139, USA. 
@@ -22,16 +22,16 @@ TARGET HARDWARE/SOFTWARE
 ------------------------
     - Beagleboard-xM Rev B.
     - Linux Angstrom Distribution, kernel release 2.6.32.
-    - Aptina Beagleboard-XM Adapter/Revision 0 and MT9P015 5-megapixel bayer sensor.
+    - Aptina Beagleboard-XM Adapter/Revision 0 and MT9P004 5-megapixel bayer sensor.
 
 
 DRIVER SOURCE CODE FILES
 ------------------------
     Driver files and directory locations are listed below:
-    mt9p015.c, mt9p015_regs.h, Makefile, and Kconfig are located at:
+    mt9p004.c, mt9p004_regs.h, Makefile, and Kconfig are located at:
         kernel-2.6.32/drivers/media/video
 
-    mt9p015.h and v4l2-chip-ident.h are located at:
+    mt9p004.h and v4l2-chip-ident.h are located at:
         kernel-2.6.32/include/media
 
     board-omap3beagle.c and board-omap3beagle-camera.c are located at:
@@ -76,41 +76,41 @@ PREPARING SD-CARD
 
 LINUX KERNEL CONFIGURATION/COMPILATION
 --------------------------------------
-    Copy MT9P015 related files into the kernel directories:
-        $cp your_mt9p015_driver_directory/board-omap3beagle.c           ./arch/arm/mach-omap2
-        $cp your_mt9p015_driver_directory/board-omap3beagle-camera.c    ./arch/arm/mach-omap2
-        $cp your_mt9p015_driver_directory/mt9p015.c                     ./drivers/media/video
-	$cp your_mt9p015_driver_directory/mt9p015_regs.h                ./drivers/media/video
-        $cp your_mt9p015_driver_directory/Makefile                      ./drivers/media/video
-        $cp your_mt9p015_driver_directory/Kconfig                       ./drivers/media/video
-        $cp your_mt9p015_driver_directory/mt9p015.h                     ./include/media
+    Copy MT9P004 related files into the kernel directories:
+        $cp your_mt9p004_driver_directory/board-omap3beagle.c           ./arch/arm/mach-omap2
+        $cp your_mt9p004_driver_directory/board-omap3beagle-camera.c    ./arch/arm/mach-omap2
+        $cp your_mt9p004_driver_directory/mt9p004.c                     ./drivers/media/video
+	$cp your_mt9p004_driver_directory/mt9p004_regs.h                ./drivers/media/video
+        $cp your_mt9p004_driver_directory/Makefile                      ./drivers/media/video
+        $cp your_mt9p004_driver_directory/Kconfig                       ./drivers/media/video
+        $cp your_mt9p004_driver_directory/mt9p004.h                     ./include/media
 
     At the root directory of Linux kernel source files, enter the commands:
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- distclean
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- omap3_beagle_cam_defconfig
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- menuconfig
 
-    In menuconfig, enable the MT9P015 driver. The MT9P015 driver configuration is at the
+    In menuconfig, enable the MT9P004 driver. The MT9P004 driver configuration is at the
     following location:
         "Device Drivers"-->"Multimedia support"-->"Video capture adapters"-->"Encoders/decoders and other helper chips" 
 
-    Select "Aptina MT9P015 raw sensor driver (5MP)":
-	<*> Aptina MT9P015 raw sensor driver (5MP)
+    Select "Aptina MT9P004 raw sensor driver (5MP)":
+	<*> Aptina MT9P004 raw sensor driver (5MP)
     so that the driver is part of kernel image, or
 
-        <M> Aptina MT9P015 raw sensor driver (5MP)
-    which configures the mt9p015 driver as a loadable module.	
+        <M> Aptina MT9P004 raw sensor driver (5MP)
+    which configures the mt9p004 driver as a loadable module.	
 
     Note: other image sensors (such as the MT9V011 or MT9P012) should be de-selected.
 
-    Enable/Disable MT9P015 driver compilation options that are located in the mt9p015.c file:
-        MT9P015_DEBUG - Define this to enable SYSFS sensor register access and debug printk support
+    Enable/Disable MT9P004 driver compilation options that are located in the mt9p004.c file:
+        MT9P004_DEBUG - Define this to enable SYSFS sensor register access and debug printk support
             Undefine this for a driver release. 
  
     Compile the kernel:
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- uImage
 
-    and compile the mt9p015 driver separately if it is configured as a loadable module
+    and compile the mt9p004 driver separately if it is configured as a loadable module
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- modules
 
     Copy the kernel image to the SD card FAT partition:
@@ -131,8 +131,8 @@ LINUX KERNEL CONFIGURATION/COMPILATION
     Uncompress the file-system and copy it to the SD card EXT3 partition
         $sudo tar -C /media/Angstrom -xjvf Angstrom-Beagleboard-demo-image-glibc-ipk-2011.1-beagleboard.rootfs.tar.bz2
 
-    Copy the driver to the EXT3 partition if the mt9p015 driver is configured as a loadable module
-        $cp drivers/media/video/mt9p015.ko  /media/Anstrom/home/root
+    Copy the driver to the EXT3 partition if the mt9p004 driver is configured as a loadable module
+        $cp drivers/media/video/mt9p004.ko  /media/Anstrom/home/root
 
     Then umount the card
         $sync; sudo umount /media/*
@@ -145,10 +145,10 @@ BOOT UP BEAGLEBOARD
     Follow the standard procedures to boot up the Beagleboard.  If the sensor driver is configured as a loadable module, 
     it needs to be inserted manually:
         #cd /home/root
-        #insmod mt9p015.ko
+        #insmod mt9p004.ko
 
 
-ANGSTROM VIDEO APPLICATION USING THE MT9P015 SENSOR
+ANGSTROM VIDEO APPLICATION USING THE MT9P004 SENSOR
 ---------------------------------------------------
     The Angstrom "mplayer" video application can be used for previewing video at various r
     esolutions such as VGA(640x480) or 720p(1280x720):
@@ -161,7 +161,7 @@ ANGSTROM VIDEO APPLICATION USING THE MT9P015 SENSOR
         #opkg update; opkg install ntpdate
 
 
-MT9P015 SUPPORTED OUTPUT FRAME SIZES
+MT9P004 SUPPORTED OUTPUT FRAME SIZES
 ------------------------------------
     width=640,  height=480
     width=1280, height=720
@@ -170,7 +170,7 @@ MT9P015 SUPPORTED OUTPUT FRAME SIZES
     width=2592, height=1944
 
 
-MT9P015 SUPPORTED OUTPUT FRAME FORMATS
+MT9P004 SUPPORTED OUTPUT FRAME FORMATS
 --------------------------------------
     YUYV(Y-Cb-Y-Cr)
     UYVY(Cb-Y-Cr-Y)
@@ -184,10 +184,10 @@ USE MPLAYER TO TAKE SNAPSHOTS
 
 DIRECT ACCESS TO IMAGE SENSOR REGISTERS VIA SYSFS
 -------------------------------------------------
-    For the following to work, the MT9P015 driver must be compiled with the debugging
-    option enabled (i.e., the MT9P015_DEBUG flag is enabled).
+    For the following to work, the MT9P004 driver must be compiled with the debugging
+    option enabled (i.e., the MT9P004_DEBUG flag is enabled).
 
-    The MT9P015 driver exposes device registers to the user via the SYSFS interface. This
+    The MT9P004 driver exposes device registers to the user via the SYSFS interface. This
     means device registers can be written/read as though they are files.
 
     To access sensor registers, navigate to the following system directory:
@@ -207,10 +207,10 @@ DIRECT ACCESS TO IMAGE SENSOR REGISTERS VIA SYSFS
     To read the global gain, use the following command:
         $cat gain_val
 
-    For more information, please refer to gain index-table, MT9P015_EV_GAIN_TBL[] available
-    in mt9p015.c file.
+    For more information, please refer to gain index-table, MT9P004_EV_GAIN_TBL[] available
+    in mt9p004.c file.
 
-    The following gives examples of accessing other MT9P015 registers:
+    The following gives examples of accessing other MT9P004 registers:
     To read 16-bit value from the register at address 0x3028:
         $echo 0x3028 > adv_reg_addr
         $cat adv_reg_val

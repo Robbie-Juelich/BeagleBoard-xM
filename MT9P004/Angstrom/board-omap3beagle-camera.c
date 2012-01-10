@@ -539,29 +539,29 @@ struct mt9p031_platform_data mt9p031_pdata = {
 
 #endif				/* #ifdef CONFIG_VIDEO_MT9P031 */
 
-#if defined(CONFIG_VIDEO_MT9P015) || defined(CONFIG_VIDEO_MT9P015_MODULE)
-#include <media/mt9p015.h>
+#if defined(CONFIG_VIDEO_MT9P004) || defined(CONFIG_VIDEO_MT9P004_MODULE)
+#include <media/mt9p004.h>
 
-#define ISP_MT9P015_MCLK	216000000
+#define ISP_MT9P004_MCLK	216000000
 
 /* Arbitrary memory handling limit */
-#define MT9P015_BIGGEST_FRAME_BYTE_SIZE	PAGE_ALIGN((2592 * 1944) * 2 * 4 )
+#define MT9P004_BIGGEST_FRAME_BYTE_SIZE	PAGE_ALIGN((2592 * 1944) * 2 * 4 )
 
-static struct isp_interface_config mt9p015_if_config = {
+static struct isp_interface_config mt9p004_if_config = {
 	.ccdc_par_ser		= ISP_PARLL,
 	.dataline_shift		= 0x1,
 	.hsvs_syncdetect	= ISPCTRL_SYNC_DETECT_VSRISE,
 	.strobe			= 0x0,
 	.prestrobe		= 0x0,
 	.shutter		= 0x0,
-	.cam_mclk		= ISP_MT9P015_MCLK,
+	.cam_mclk		= ISP_MT9P004_MCLK,
 	.wenlog 		= ISPCCDC_CFG_WENLOG_AND,
 	.wait_hs_vs		= 2,
 	.u.par.par_bridge	= 0x0,
 	.u.par.par_clk_pol	= 0x0,
 };
 
-static struct v4l2_ifparm mt9p015_ifparm_s = {
+static struct v4l2_ifparm mt9p004_ifparm_s = {
 	.if_type = V4L2_IF_TYPE_RAW,
 	.u 	 = {
 		.raw = {
@@ -571,47 +571,47 @@ static struct v4l2_ifparm mt9p015_ifparm_s = {
 			.latch_clk_inv		= 0,
 			.nobt_hs_inv		= 0,	/* active high */
 			.nobt_vs_inv		= 0,	/* active high */
-			.clock_min		= MT9P015_CLK_MIN,
-			.clock_max		= MT9P015_CLK_MAX,
+			.clock_min		= MT9P004_CLK_MIN,
+			.clock_max		= MT9P004_CLK_MAX,
 		},
 	},
 };
 
 /**
- * @brief mt9p015_ifparm - Returns the mt9p031 interface parameters
+ * @brief mt9p004_ifparm - Returns the mt9p031 interface parameters
  *
  * @param p - pointer to v4l2_ifparm structure
  *
  * @return result of operation - 0 is success
  */
-static int mt9p015_ifparm(struct v4l2_ifparm *p)
+static int mt9p004_ifparm(struct v4l2_ifparm *p)
 {	
 	if (p == NULL)
 		return -EINVAL;
 
-	*p = mt9p015_ifparm_s;
+	*p = mt9p004_ifparm_s;
 	return 0;
 }
 
 #if defined(CONFIG_VIDEO_OMAP3) || defined(CONFIG_VIDEO_OMAP3_MODULE)
-static struct omap34xxcam_hw_config mt9p015_hwc = {
+static struct omap34xxcam_hw_config mt9p004_hwc = {
 	.dev_index		= 1,
 	.dev_minor		= -1,
 	.dev_type		= OMAP34XXCAM_SLAVE_SENSOR,
 	.u.sensor.sensor_isp	= 0,
-	.u.sensor.capture_mem	= MT9P015_BIGGEST_FRAME_BYTE_SIZE,
+	.u.sensor.capture_mem	= MT9P004_BIGGEST_FRAME_BYTE_SIZE,
 	.u.sensor.ival_default	= { 1, 30 },
 };
 #endif
 
 /**
- * @brief mt9p015_set_prv_data - Returns mt9p031 omap34xx driver private data
+ * @brief mt9p004_set_prv_data - Returns mt9p031 omap34xx driver private data
  *
  * @param priv - pointer to omap34xxcam_hw_config structure
  *
  * @return result of operation - 0 is success
  */
-static int mt9p015_set_prv_data(void *priv)
+static int mt9p004_set_prv_data(void *priv)
 {
 #if defined(CONFIG_VIDEO_OMAP3) || defined(CONFIG_VIDEO_OMAP3_MODULE)
 	struct omap34xxcam_hw_config *hwc = priv;
@@ -619,7 +619,7 @@ static int mt9p015_set_prv_data(void *priv)
 	if (priv == NULL)
 		return -EINVAL;
 
-	*hwc = mt9p015_hwc;
+	*hwc = mt9p004_hwc;
 	return 0;
 #else
 	return -EINVAL;
@@ -627,13 +627,13 @@ static int mt9p015_set_prv_data(void *priv)
 }
 
 /**
- * @brief mt9p015_power_set - Power-on or power-off mt9p031 device
+ * @brief mt9p004_power_set - Power-on or power-off mt9p031 device
  *
  * @param power - enum, Power on/off, resume/standby
  *
  * @return result of operation - 0 is success
  */
-static int mt9p015_power_set(struct v4l2_int_device *s, enum v4l2_power power)
+static int mt9p004_power_set(struct v4l2_int_device *s, enum v4l2_power power)
 {	
 	struct omap34xxcam_videodev *vdev = s->u.slave->master->priv;
 	switch (power) {
@@ -649,7 +649,7 @@ static int mt9p015_power_set(struct v4l2_int_device *s, enum v4l2_power power)
 
 	case V4L2_POWER_ON:
 #if defined(CONFIG_VIDEO_OMAP3) || defined(CONFIG_VIDEO_OMAP3_MODULE)
-		isp_configure_interface(vdev->cam->isp, &mt9p015_if_config);
+		isp_configure_interface(vdev->cam->isp, &mt9p004_if_config);
 #endif
 
 		/* Set RESET_BAR to 0 */
@@ -694,22 +694,22 @@ static int mt9p015_power_set(struct v4l2_int_device *s, enum v4l2_power power)
 	return 0;
 }
 
-static u32 mt9p015_set_xclk(struct v4l2_int_device *s, u32 xclkfreq)
+static u32 mt9p004_set_xclk(struct v4l2_int_device *s, u32 xclkfreq)
 {	
     struct omap34xxcam_videodev *vdev = s->u.slave->master->priv;
     return isp_set_xclk(vdev->cam->isp, xclkfreq, 0);
 }
 
 
-struct mt9p015_platform_data mt9p015_pdata = {
+struct mt9p004_platform_data mt9p004_pdata = {
 	.master		= "omap34xxcam",
-	.power_set	= mt9p015_power_set,
-	.set_xclk       = mt9p015_set_xclk,
-	.priv_data_set	= mt9p015_set_prv_data,
-	.ifparm		= mt9p015_ifparm,
+	.power_set	= mt9p004_power_set,
+	.set_xclk       = mt9p004_set_xclk,
+	.priv_data_set	= mt9p004_set_prv_data,
+	.ifparm		= mt9p004_ifparm,
 };
 
-#endif				/* #ifdef CONFIG_VIDEO_MT9P015 */
+#endif				/* #ifdef CONFIG_VIDEO_MT9P004 */
 
 #if defined(CONFIG_VIDEO_MT9D131) || defined(CONFIG_VIDEO_MT9D131_MODULE)
 #include <media/mt9d131.h>

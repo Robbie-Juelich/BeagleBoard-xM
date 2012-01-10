@@ -89,10 +89,10 @@ extern struct mt9t112_platform_data mt9t112_pdata;
 extern struct mt9p031_platform_data mt9p031_pdata;
 #endif
 
-#if defined(CONFIG_VIDEO_MT9P015) || defined(CONFIG_VIDEO_MT9P015_MODULE)
+#if defined(CONFIG_VIDEO_MT9P004) || defined(CONFIG_VIDEO_MT9P004_MODULE)
 #include <media/v4l2-int-device.h>
-#include <media/mt9p015.h>
-extern struct mt9p015_platform_data mt9p015_pdata;
+#include <media/mt9p004.h>
+extern struct mt9p004_platform_data mt9p004_pdata;
 #endif
 
 #if defined(CONFIG_VIDEO_MT9D131) || defined(CONFIG_VIDEO_MT9D131_MODULE)
@@ -644,10 +644,10 @@ static struct i2c_board_info __initdata beagle_i2c2_boardinfo[] = {
 	},
 #endif
 
-#if defined(CONFIG_VIDEO_MT9P015) || defined(CONFIG_VIDEO_MT9P015_MODULE)		
+#if defined(CONFIG_VIDEO_MT9P004) || defined(CONFIG_VIDEO_MT9P004_MODULE)		
 	{
-		I2C_BOARD_INFO("mt9p015", MT9P015_I2C_ADDR),
-		.platform_data	= &mt9p015_pdata,
+		I2C_BOARD_INFO("mt9p004", MT9P004_I2C_ADDR),
+		.platform_data	= &mt9p004_pdata,
 	},
 #endif
 
