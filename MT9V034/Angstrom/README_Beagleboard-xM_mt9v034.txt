@@ -46,14 +46,11 @@ BEAGLEBOARD/ANGSTROM SETUP
     Many of the Beagleboard/Angstrom files can be found at the following link:
         http://www.angstrom-distribution.org/demo/beagleboard/
     
-    The Linux kernel source code tar file 
-        beagleboard-validation-linux-beaglebardXM-camwork.tar.gz
-    can be found at the following location:
-        http://gitorious.org/beagleboard-validation/linux/trees/beaglebardXM-camwork
+    The Linux kernel source code tar file can be found at the following location:
+	http://www.kernel.org/pub/linux/kernel/v3.x/linux-3.1.2.tar.bz2
 
     Once downloaded, uncompress the file with the following command:
-        $tar zxvf beagleboard-validation-linux-beaglebardXM-camwork.tar.gz
-    Ignore the error messages if any.
+        $tar jxvf linux-3.1.2.tar.bz2
 
     Download and install the compilation tool chain from:
         http://www.angstrom-distribution.org/toolchains/
