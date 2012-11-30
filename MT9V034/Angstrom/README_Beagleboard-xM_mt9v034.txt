@@ -83,14 +83,12 @@ LINUX KERNEL CONFIGURATION/COMPILATION
         $cp your_mt9v034_driver_directory/v4l2-chip-ident.h    ./include/media
 
     Edit ./arch/arm/mach-omap2/Makefile to include board-omap3beagle-camera.c
-
-	obj-$(CONFIG_MACH_OMAP3_BEAGLE)         += board-omap3beagle.o \
+        obj-$(CONFIG_MACH_OMAP3_BEAGLE)         += board-omap3beagle.o \
         	                                   board-omap3beagle-camera.o \
                 	                           hsmmc.o
-    
-    Copy omap3_beagle_cam_defconfig file from https://github.com/aptina/BeagleBoard-xM :
-	$cp omap3_beagle_cam_defconfig ./arch/arm/configs/
 
+    Copy omap3_beagle_cam_defconfig file from https://github.com/aptina/BeagleBoard-xM :
+        $cp omap3_beagle_cam_defconfig ./arch/arm/configs/
 
     At the root directory of Linux kernel source files, enter the commands:
         $make ARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- distclean
