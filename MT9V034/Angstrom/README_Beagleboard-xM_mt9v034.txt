@@ -22,7 +22,8 @@ TARGET HARDWARE/SOFTWARE
 ------------------------
     - Beagleboard-xM Rev C.
     - Linux Angstrom Distribution, kernel release 3.1.2.
-    - Aptina Beagleboard-XM Adapter/Revision 0 and MT9V034 Wide-VGA sensor.
+    - Aptina MT9V034 Wide-VGA sensor demo headboard.
+    - Aptina Beagleboard-XM Adapter/Revision (Required only with Aptina sensor headboards).
 
 
 DRIVER SOURCE CODE FILES
